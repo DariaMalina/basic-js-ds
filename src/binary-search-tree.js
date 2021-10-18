@@ -18,48 +18,48 @@ module.exports = class BinarySearchTree {
     this._root = null;
   }
 
-  #deepAdd(curr, newNode) {
+  deepAdd(curr, newNode) {
     if (curr.data < newNode.data) {
       if (curr.right === null) {
         curr.right = newNode;
       } else {
-        this.#deepAdd(curr.right, newNode);
+        this.deepAdd(curr.right, newNode);
       }
     }
     if (curr.data > newNode.data) {
       if (curr.left === null) {
         curr.left = newNode;
       } else {
-        this.#deepAdd(curr.left, newNode);
+        this.deepAdd(curr.left, newNode);
       }
     }
   }
 
-  #searchDate(node, date) {
+  searchDate(node, date) {
     if (node === null) {
       return false;
     } else if (node.data > date) {
-      return this.#searchDate(node.left, date);
+      return this.searchDate(node.left, date);
     } else if (node.data < date) {
-      return this.#searchDate(node.right, date);
+      return this.searchDate(node.right, date);
     } else if (node.data === date) {
       return true;
     }
   }
 
-  #findDate(node, date) {
+  findDate(node, date) {
     if (node === null) {
       return null;
     } else if (node.data > date) {
-      return this.#findDate(node.left, date);
+      return this.findDate(node.left, date);
     } else if (node.data < date) {
-      return this.#findDate(node.right, date);
+      return this.findDate(node.right, date);
     } else if (node.data === date) {
       return node;
     }
   }
 
-  #removeDate(node, data) {}
+  removeDate(node, data) {}
 
   root() {
     return this._root;
@@ -70,23 +70,23 @@ module.exports = class BinarySearchTree {
     if (!this._root) {
       this._root = new Node(data);
     } else {
-      this.#deepAdd(this._root, newNode);
+      this.deepAdd(this._root, newNode);
     }
   }
 
   has(data) {
-    return this.#searchDate(this._root, data);
+    return this.searchDate(this._root, data);
   }
 
   find(data) {
-    return this.#findDate(this._root, data);
+    return this.findDate(this._root, data);
   }
 
   remove(data) {
     if (this._root.data === data) {
       this._root = null;
     } else {
-      this.#removeDate(this._root, data);
+      this.removeDate(this._root, data);
     }
   }
 
